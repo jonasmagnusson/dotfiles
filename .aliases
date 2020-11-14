@@ -1,0 +1,38 @@
+# Make ls more colorful
+alias ls='ls -lah --color'
+
+# No reason to run apt-get without sudo
+alias apt-get='sudo apt-get'
+
+# Powershell-style clear
+alias cls='clear'
+
+# Aliases for tmux
+alias ta="tmux attach -t $1"
+alias td="tmux detach"
+alias tn="tmux new -s $1"
+alias tl="tmux ls"
+
+# Start vulnerable web applications
+alias juiceshop="sudo docker run --rm -p 3000:3000 bkimminich/juice-shop"
+alias dvwa="sudo docker run --rm -it -p 80:80 vulnerables/web-dvwa"
+alias webgoat="sudo docker run -p 8080:8080 -t webgoat/webgoat-8.0"
+alias securityshepherd="sudo docker run -i -p 80:80 -p 443:443 -t ismisepaul/securityshepherd /bin/bash"
+
+# Recreate git repository to remove history
+git-clean () {
+    git checkout --orphan tmp-branch
+    git add -A
+    git commit -m "Initial commit."
+    git branch -D main
+    git branch -m main
+    git push -f origin main
+    git gc --aggressive --prune=all
+}
+
+# Git add, commit and push to repository
+git-acp () {
+    git add -A
+    git commit -m "$1"
+    git push
+}
